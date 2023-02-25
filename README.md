@@ -5,4 +5,4 @@
 
 
 * Frontend hosted on Netlify:
-Link to Frontend code: [link](https://wavescan-fe.netlify.app)
+#Link to Frontend code: [link](https://wavescan-fe.netlify.app)
