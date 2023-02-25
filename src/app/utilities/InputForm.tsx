@@ -273,7 +273,7 @@ function InputForm() {
             <div className='form_main_container'>
                 {((switchToScannerList)) ?
                 <>
-                <h2 className='form_main_container_header'>Scanner Lists</h2>
+                <h2 className='form_main_container_header'>Scanner List</h2>
                 <span className='form_main_container_header_underline'></span>
                 <div className='scanner_number_component'>
                     <h4 className='scanner_number_component_h4'>Scanners found: {scannerList.length}</h4>
