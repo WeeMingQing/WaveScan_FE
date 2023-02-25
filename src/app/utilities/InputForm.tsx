@@ -384,7 +384,7 @@ function InputForm() {
                 </>
                 :
                 <>
-                <h2 className='form_main_container_header'>Scanner Details</h2>
+                <h2 className='form_main_container_header'>Scanning Details</h2>
                 <span className='form_main_container_header_underline'></span>
                 <div className='form_main_container_components'>
                     <h3 className='form_main_container_components_h3'>Project Name</h3>
