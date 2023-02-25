@@ -1,0 +1,17 @@
+.NavBar_main_container {
+    position: fixed;
+    display: flex;
+    height: 4rem;
+    width: 100%;
+    background-color: #CFFF9F;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 12;
+}
+
+.NavBar_main_container img {
+    margin-top: 0.5rem;
+    width: 8rem;
+    height: 8rem;    
+}

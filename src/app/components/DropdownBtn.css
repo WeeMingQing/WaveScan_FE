@@ -1,0 +1,109 @@
+.DropdownBtn_main_container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+}
+
+.DropdownBtn_main_container_main_btn {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    border: 1px solid black;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    background-color: white;
+    padding-left: 2rem;
+}
+
+.DropdownBtn_main_container_main_btn:hover {
+    cursor: pointer;
+    background-color: rgb(207, 207, 207);
+}
+
+.DropdownBtn_main_container_main_btn_open {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    border: 1px solid black;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    border-bottom: none;
+    padding-left: 2rem;
+    background-color: rgb(224, 224, 224);
+
+}
+
+.DropdownBtn_main_container_main_btn_h4 {
+    font-size: 1rem;
+}
+
+.DropdownBtn_table {
+    display: none;
+}
+
+.DropdownBtn_table_open {
+    z-index: 9;
+    display: grid;
+    border: 1px solid black;
+    grid-template-columns: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;  
+    width: auto;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    height: max-content;
+    background-color: white;
+    justify-items: center;
+    padding-bottom: 1.8rem;
+}
+
+.DropdownBtn_table_list-item {
+    width: 100%;
+    min-height: 2.8rem;
+    height: max-content;
+    border: none;
+    overflow-wrap: break-word;
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0.5rem;
+    background-color: white;
+}
+
+.DropdownBtn_table_list-item:hover {
+    background-color: rgb(218, 219, 252);
+    cursor: pointer;
+
+}
+
+.DropdownBtn_table_list-item h4 {
+    width: 100%;
+    overflow-wrap: break-word;
+    height: max-content;
+    font-size: 1rem;
+}
+
+.dropdown_img {
+    transition: 400ms ease;
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.dropdown_img.rotate_down {
+    transform: rotate(180deg);
+    transition: 400ms ease;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
