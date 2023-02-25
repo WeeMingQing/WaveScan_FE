@@ -8,7 +8,12 @@ export type InputFormProps = {
     scannerFrequency: Number //need to check if it is Float
 }
 
-export async function postInputForm(formData: InputFormProps) {
+type postInputFormProps = {
+    formData: InputFormProps,
+    updateResponseError:()=> void
+}
+
+export async function postInputForm({formData, updateResponseError}: postInputFormProps) {
     fetch(`${IF_API_URL}`, {
         method: "POST",
         headers: {
@@ -19,9 +24,8 @@ export async function postInputForm(formData: InputFormProps) {
         )
     }).then((response) => {
         if (response.status == 200) {
-            console.log("Yeah, successful");
         } else if (response.status == 400){
-            console.log("Please try again!");
+            updateResponseError();
         }
     })
 };

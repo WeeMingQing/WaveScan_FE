@@ -52,10 +52,15 @@ function InputForm() {
     const [switchToScannerList, setSwitchToScannerList] = useState<boolean>(false);
     const [scannerList, setScannerList] = useState<ScannerListProps[]>([]);
     const [btnDisabled, setBtnDisabled] = useState<boolean>(false);
+    const [responseError, setResponseError] = useState<boolean>(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [switchToScannerList]);
+
+    function updateResponseError() {
+        setResponseError(prevResponseError => !prevResponseError);
+    }
 
     function updateScannerList(scannerList: ScannerListProps[]) {
         setScannerList(scannerList);
@@ -80,8 +85,6 @@ function InputForm() {
         const target = event.target as HTMLInputElement;
         projectName.current = target.value.trim();
         setProjectNameState(projectName.current);
-        console.log("hello" + projectName.current);
-        console.log("hey" + projectNameState);
     }
 
     function checkProjectName() {
@@ -115,8 +118,7 @@ function InputForm() {
         const target = event.target as HTMLInputElement;
         scanDimensionsX.current = target.value.trim();
         setScanDimensionsXState(scanDimensionsX.current);
-        console.log("hello" + scanDimensionsX.current);
-        console.log("hey" + scanDimensionsXState);
+
     }
 
     function checkDimensionsX() {
@@ -133,7 +135,6 @@ function InputForm() {
         } else {
             setScanDimensionsXErrorMsg("");
             setScanDimensionsXErr("");
-            console.log(scanDimensionsX.current);
             removeFromErrorArray(namesArray[2]);
         }
     }
@@ -142,8 +143,7 @@ function InputForm() {
         const target = event.target as HTMLInputElement;
         scanDimensionsY.current = target.value.trim();
         setScanDimensionsYState(scanDimensionsY.current);
-        console.log("hello" + scanDimensionsY.current);
-        console.log("hey" + scanDimensionsYState);
+
     }
 
     function checkDimensionsY() {
@@ -162,7 +162,6 @@ function InputForm() {
             setScanDimensionsYErrorMsg("");
             setScanDimensionsYErr("");
             removeFromErrorArray(namesArray[3]);
-            console.log(scanDimensionsY.current);
         }
     }
 
@@ -170,8 +169,6 @@ function InputForm() {
         const target = event.target as HTMLInputElement;
         scannerFrequency.current = target.value.trim();
         setScannerFrequencyState(scannerFrequency.current);
-        console.log("hello" + scannerFrequency.current);
-        console.log("hey" + scannerFrequencyState);
     }
 
     function checkScannerFrequency() {
@@ -213,25 +210,31 @@ function InputForm() {
                 "scanDimensionsY": Number(scanDimensionsY.current),
                 "scannerFrequency": Number(scannerFrequency.current)
             };
-            postInputForm(formData);
-            getScannerList({updateScannerList}).then(() => {
-                setOpenModal(true);
-                setLoading(true);
-                setSubmitted(true);
-                console.log(scannerList);
-                setTimeout(()=>{
-                    setOpenModal(false);
+            postInputForm({formData, updateResponseError}).then(() => {
+                if (responseError) {
                     setLoading(false);
-                    setSwitchToScannerList(true);
-                }, 5000);
-            })
+                    setSubmitted(false);
+                    setOpenModal(true);
+                    setBtnDisabled(false);
+                } else {
+                    getScannerList({updateScannerList}).then(() => {
+                        setOpenModal(true);
+                        setLoading(true);
+                        setSubmitted(true);
+                        setTimeout(()=>{
+                            setOpenModal(false);
+                            setLoading(false);
+                            setSwitchToScannerList(true);
+                        }, 5000);
+                    })
+                }
+            });
         } else {
             setLoading(false);
             setSubmitted(false);
             setOpenModal(true);
-        }
-        setBtnDisabled(false);
-        
+            setBtnDisabled(false);
+        }        
     };
 
     return (
@@ -240,6 +243,12 @@ function InputForm() {
                 <div className='modal_container'>
                     <div className='modal_card'>
                         <h2 className='modal_header'>{(submitted) ? "Form Submitted" : "Error Message"}</h2>
+                        {(responseError) ?
+                        <>
+                        <h4 className='modal_content'>Please try again in a while</h4>
+                        </>
+                        :
+                        <>
                         <h4 className='modal_content'>{(submitted) ? "Your form has been successfully submitted. Please wait while we search for the scanners.": 
                         `Please check the following input fields:`}</h4>
                         <div className='errorMsgList'>
@@ -248,6 +257,8 @@ function InputForm() {
                         })
                         }
                         </div>
+                        </>
+                        }
                         <div className='modal_loading_component'>
                             {(submitted) ?
                                 <ClipLoader color={"blue"} loading={loading as boolean} size={30}/>

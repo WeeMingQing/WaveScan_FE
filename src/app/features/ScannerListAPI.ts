@@ -20,9 +20,7 @@ export async function getScannerList({updateScannerList}: getScannerListInput){
     }).then((response) => response.json())
     .then(data => {
         let d: ScannerListProps[] = data;
-        console.log("ceek" + d);
         updateScannerList(data);
     }).catch((error) => {
-        console.log("An error has occurred. Please try again later!");
     })
 };
