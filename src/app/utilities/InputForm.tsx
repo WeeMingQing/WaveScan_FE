@@ -178,7 +178,7 @@ function InputForm() {
             setScannerFrequencyErrorMsg(errorMessage[5]);
             setScannerFrequencyErr(" error");
             addToErrorArray(namesArray[4]);
-        } else if (a <= 0) {
+        } else if (a < 1) {
             setScannerFrequencyErrorMsg(errorMessage[3]);
             setScannerFrequencyErr(" error");
             addToErrorArray(namesArray[4]);
